@@ -9,7 +9,7 @@ type postData = {
 
 export default function page({ data }: { data: postData }) {
     return (
-        <div className="flex items-center justify-center min-h-screen">
+        <div className="flex items-center justify-center min-h-screen px-6 md:px-0">
             <div className="text-center max-w-96 space-y-2 bg-[#FFE4C4] p-5 rounded-xl">
                 <h4 className="text-xl font-bold">{data?.title}</h4>
                 <p><span className="font-bold">body:</span> {data?.body}</p>
@@ -22,7 +22,9 @@ export async function getStaticPaths() {
     const res = await axios(`https://jsonplaceholder.typicode.com/posts`);
     const posts = await res.data;
 
-    const paths = posts.map((post: any) => ({
+    const paths = posts.map((post: {
+        id: number
+    }) => ({
         params: { id: post.id.toString() },
     }));
 
@@ -34,7 +36,7 @@ export async function getStaticPaths() {
 
 
 export const getStaticProps = (
-    async ({ params }: any) => {
+    async ({ params }: { params: { id: string } }) => {
         const res = await axios(`https://jsonplaceholder.typicode.com/posts/${params?.id}`)
         const data = await res.data;
         console.log(data)

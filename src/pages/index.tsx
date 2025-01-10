@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
 import Card from "@/components/Card/Card";
 
@@ -24,7 +23,7 @@ type HomeProps = {
 
 export default function Home({ data }: HomeProps) {
   return (
-    <div className={`${geistSans.variable} ${geistMono.variable} max-w-7xl mx-auto py-20 grid grid-cols-5 gap-8`}>
+    <div className={`${geistSans.variable} ${geistMono.variable} px-6 md:px-0 max-w-7xl mx-auto py-20 grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8`}>
       {
         data?.map((d, i) => <Card key={i} title={d?.title} id={d?.id} />)
       }
